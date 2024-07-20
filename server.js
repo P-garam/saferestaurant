@@ -34,13 +34,13 @@ const apiRouter = require('./server/routes/api');
 const app = express();
 const PORT = process.env.PORT || 3003;
 
-// 쿠키 설정을 위한 미들웨어 추가
 app.use((req, res, next) => {
     res.cookie('exampleCookie', 'exampleValue', {
-        httpOnly: true, // JavaScript에서 접근 불가능
-        secure: true, // HTTPS에서만 쿠키 전송
-        sameSite: 'None' // 크로스 사이트 요청에 쿠키 전송 허용
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None'
     });
+    console.log('Cookie set:', req.cookies); // 쿠키 설정 확인을 위한 로그 추가
     next();
 });
 
