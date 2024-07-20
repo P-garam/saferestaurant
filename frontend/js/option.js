@@ -285,3 +285,4 @@ document.addEventListener('DOMContentLoaded', function() {
         loadMap(region);
     }
 });
+//수정확인
