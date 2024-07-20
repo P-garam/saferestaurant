@@ -67,6 +67,7 @@
 -->
 
 <!--frontend/daegu.html-->
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,73 @@
             loadMap('daegu');
         };
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1&display=swap" rel="stylesheet">
+    <title>Daegu</title>
+</head>
+<body>
+    <div id="background">
+        <img id="img1" src="https://www.farmersbestbd.com/wp-content/uploads/2020/08/FVFV28-001.png">
+    </div>
+    <div class="all">
+        <div id="menu">
+            <div id ="menu2">
+                <div id="logo">
+                    <a href="index.html">SAFE FOODING</a>
+                </div>
+                <div id="list">
+                    <a href="introduction.html">Introduction</a>
+                    <a href="fiction.html">Fiction</a>
+                    <a href="fiction.html">Fiction</a>
+                </div>
+                <div id="search">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" name="searchInput" class="search-box" placeholder="Search">
+                        <div class="search-button">
+                            <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="screen">
+            <div id="screen1"></div>
+            <div id="screen2">
+                <div id="left-screen">
+                    <select id="regionSelect1" name="regionSelect1" onchange="navigate()">
+                        <option value="">지역 선택</option>
+                        <option value="busan">부산</option>
+                        <option value="daegu">대구</option>
+                    </select>
+                    <section id="map">
+                        전체지도
+                    </section>
+                </div>
+                <div id="right-screen">
+                    네이버결과
+                </div>
+            </div>
+        </div>  
+    </div>
+</body>
+</html>
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/busan-style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=33af94d7a5f5cfbe2f64091de3ca69a3"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            loadMap('daegu');
+        };
+    </script>
+    <script type="text/javascript" src="js/option.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1&display=swap" rel="stylesheet">
     <title>Daegu</title>
