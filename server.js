@@ -30,17 +30,21 @@ app.listen(PORT, () => {
 const express = require('express');
 const path = require('path');
 const apiRouter = require('./server/routes/api');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3003;
 
+app.use(cookieParser());
+
+// 쿠키 설정 미들웨어 추가
 app.use((req, res, next) => {
     res.cookie('exampleCookie', 'exampleValue', {
         httpOnly: true,
         secure: true,
         sameSite: 'None'
     });
-    console.log('Cookie set:', req.cookies); // 쿠키 설정 확인을 위한 로그 추가
+    console.log('Cookie set:', req.cookies);
     next();
 });
 
