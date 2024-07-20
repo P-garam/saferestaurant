@@ -187,13 +187,15 @@ function loadMap(region) {
 
 // frontend/js/option.js
 
-function navigate() {
-    const region = document.getElementById('regionSelect').value || document.getElementById('regionSelect1').value;
+// 페이지 로드 시 지역에 맞는 지도 로드
+document.addEventListener('DOMContentLoaded', function() {
+    const region = window.location.pathname.split('/').pop().split('.').shift(); // 현재 파일 이름을 통해 지역을 추출
     if (region) {
-        window.location.href = `${region}.html`;
+        loadMap(region);
     }
-}
+});
 
+// 지도 로드 및 마커 추가
 function loadMap(region) {
     const mapContainer = document.getElementById('map');
     const mapOption = {
@@ -206,11 +208,13 @@ function loadMap(region) {
         daegu: new kakao.maps.LatLng(35.871435, 128.601445)
     };
 
+    // 지도 생성
     const map = new kakao.maps.Map(mapContainer, {
         ...mapOption,
         center: locations[region] || locations.busan // 지역에 따른 중심 좌표 설정
     });
 
+    // API를 통해 데이터 가져오기
     fetch(`/api/safefood/${region}`)
         .then(response => {
             if (!response.ok) {
@@ -225,6 +229,7 @@ function loadMap(region) {
                     const address = place.LOCPLC; // 주소를 가져옵니다.
                     geocodeAddress(address, (latlng) => {
                         if (latlng) {
+                            // 마커와 정보 창 설정
                             const marker = new kakao.maps.Marker({
                                 map: map,
                                 position: latlng
@@ -257,13 +262,18 @@ function loadMap(region) {
         });
 }
 
-// Geocode address using server-side Naver Geocoding API
+// 주소를 좌표로 변환하는 함수
 function geocodeAddress(address, callback) {
     const encodedAddress = encodeURIComponent(address);
     const url = `/api/geocode?query=${encodedAddress}`;
 
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data && data.addresses && data.addresses.length > 0) {
                 const latlng = new kakao.maps.LatLng(data.addresses[0].y, data.addresses[0].x);
@@ -279,10 +289,10 @@ function geocodeAddress(address, callback) {
         });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const region = window.location.pathname.split('/').pop().split('.').shift(); // 현재 파일 이름을 통해 지역을 추출
+// 지역 선택 시 페이지 이동
+function navigate() {
+    const region = document.getElementById('regionSelect').value || document.getElementById('regionSelect1').value;
     if (region) {
-        loadMap(region);
+        window.location.href = `${region}.html`;
     }
-});
-//수정확인
+}
