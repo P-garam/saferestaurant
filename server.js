@@ -1,4 +1,4 @@
-// server/server.js
+// server.js
 const express = require('express');
 const path = require('path');
 const apiRouter = require('./server/routes/api');
