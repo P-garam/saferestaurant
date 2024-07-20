@@ -263,6 +263,7 @@ function loadMap(region) {
 }
 
 // 주소를 좌표로 변환하는 함수
+/*
 function geocodeAddress(address, callback) {
     const encodedAddress = encodeURIComponent(address);
     const url = `/api/geocode?query=${encodedAddress}`;
@@ -288,6 +289,34 @@ function geocodeAddress(address, callback) {
             callback(null);
         });
 }
+*/
+
+// Geocode address using server-side Naver Geocoding API
+function geocodeAddress(address, callback) {
+    const encodedAddress = encodeURIComponent(address);
+    const url = `/api/geocode?query=${encodedAddress}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Geocoding response:', data); // 응답 데이터 확인
+            if (data && data.addresses && data.addresses.length > 0) {
+                // 좌표를 kakao.maps.LatLng 형식으로 변환
+                const lat = parseFloat(data.addresses[0].y); // 위도
+                const lng = parseFloat(data.addresses[0].x); // 경도
+                const latlng = new kakao.maps.LatLng(lat, lng);
+                callback(latlng);
+            } else {
+                console.error('Geocoding failed:', data);
+                callback(null);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching geocoding data:', error);
+            callback(null);
+        });
+}
+
 
 // 지역 선택 시 페이지 이동
 function navigate() {
