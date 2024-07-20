@@ -1,0 +1,14 @@
+{
+    "name": "my-safefooding-site",
+    "version": "1.0.0",
+    "description": "A website to help users find safe dining places.",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "axios": "^0.24.0",
+      "express": "^4.17.1"
+    }
+  }
+  
